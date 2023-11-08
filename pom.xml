@@ -50,6 +50,17 @@
           <version>3.1.5</version>
       </dependency>
 
+      <dependency>
+          <groupId>javax.xml.bind</groupId>
+          <artifactId>jaxb-api</artifactId>
+          <version>2.2.11</version>
+      </dependency>
+
+      <dependency>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-validator</artifactId>
+          <version>5.4.1.Final</version>
+      </dependency>
       <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
       <dependency>
           <groupId>org.postgresql</groupId>
@@ -61,7 +72,6 @@
           <groupId>org.hibernate</groupId>
           <artifactId>hibernate-core</artifactId>
           <version>6.3.1.Final</version>
-          <type>pom</type>
       </dependency>
       <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
       <dependency>
@@ -83,6 +93,27 @@
         <version>${junit.version}</version>
         <scope>test</scope>
       </dependency>
+      <!-- https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api -->
+      <dependency>
+          <groupId>jakarta.servlet</groupId>
+          <artifactId>jakarta.servlet-api</artifactId>
+          <version>6.0.0</version>
+          <scope>provided</scope>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/jakarta.persistence/jakarta.persistence-api -->
+      <dependency>
+          <groupId>jakarta.persistence</groupId>
+          <artifactId>jakarta.persistence-api</artifactId>
+          <version>3.1.0</version>
+      </dependency>
+
+      <!-- https://mvnrepository.com/artifact/jakarta.validation/jakarta.validation-api -->
+      <dependency>
+          <groupId>jakarta.validation</groupId>
+          <artifactId>jakarta.validation-api</artifactId>
+          <version>3.0.2</version>
+      </dependency>
+
   </dependencies>
   <build>
     <plugins>
