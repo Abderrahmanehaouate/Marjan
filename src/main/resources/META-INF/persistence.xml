@@ -7,23 +7,18 @@
 
     <provider >org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-    <class>com.youcode.marjan.Models.User</class>
-    <class>com.youcode.marjan.Models.Admin</class>
-
     <properties>
-      <!-- JDBC connection properties -->
       <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
       <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/marjan"/>
       <property name="jakarta.persistence.jdbc.user" value="postgres"/>
       <property name="jakarta.persistence.jdbc.password" value="postgres"/>
 
-      <!-- Hibernate properties -->
       <property name="jakarta.persistence.schema-generation.database.action" value="none"/>
-      <property name="hibernate.hbm2ddl.auto" value="update"/> <!-- or validate, create, create-drop -->
-      <property name="hibernate.show_sql" value="true"/> <!-- Set to 'true' to enable SQL logging -->
-      <property name="hibernate.format_sql" value="true"/> <!-- Set to 'true' to format SQL queries -->
+      <property name="hibernate.hbm2ddl.auto" value="update"/>
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.format_sql" value="true"/>
 
-      <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/> <!-- DB Dialect -->
+      <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
     </properties>
   </persistence-unit>
 </persistence>

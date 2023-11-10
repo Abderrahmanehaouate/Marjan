@@ -4,47 +4,48 @@ import com.youcode.marjan.Models.User;
 import com.youcode.marjan.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Controller
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/users")
 public class UserController {
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    @RequestMapping(value ="/user/{id}",
-    method = RequestMethod.GET,
-    produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping("/")
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
+    }
+
+    @GetMapping("/{id}")
     public User getUserById(@PathVariable Long id) {
-        System.out.println("welcom to this path users/{id}");
         return userService.getUserById(id);
     }
 
-    @GetMapping("/users")
-    public List<User> getAllUsers() {
-        System.out.println("create all users");
-        ResponseEntity.status(HttpStatus.CREATED).body("User created successfully!");
-        return userService.getAllUsers();
-
-    }
-
-    @PostMapping("/user/create")
-    public String createUser(@RequestBody User user) {
+    @PostMapping("/create")
+    public ResponseEntity<String> createUser(@RequestBody User user) {
         userService.saveUser(user);
-        return "User created successfully";
+        return new ResponseEntity<>("User created successfully", HttpStatus.OK);
     }
 
-    @DeleteMapping("/user/{id}")
+    @DeleteMapping("/{id}")
     public void deleteUserById(@PathVariable Long id) {
         userService.deleteUserById(id);
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<String> updateUser(@RequestBody User user) {
+        userService.saveUser(user);
+        return new ResponseEntity<>("User updated successfully", HttpStatus.OK);
     }
 }
 

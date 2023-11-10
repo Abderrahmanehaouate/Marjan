@@ -2,10 +2,14 @@ package com.youcode.marjan.Services;
 
 import com.youcode.marjan.Models.User;
 import com.youcode.marjan.Repositories.UserRepository;
+import com.youcode.marjan.Services.Exceptions.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -22,14 +26,20 @@ public class UserService {
 
     public void saveUser(User user) {
         userRepository.save(user);
+        ResponseEntity.status(HttpStatus.OK).body("User created successfully");
     }
 
     public void deleteUserById(Long id) {
         userRepository.deleteById(id);
+        ResponseEntity.status(HttpStatus.OK).body("User deleted successfully");
     }
 
-    public User getUserById(Long id) {
-        return userRepository.findById(id).get();
+    public User getUserById(Long userId) {
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (userOptional.isPresent()) {
+            return userOptional.get();
+        } else {
+            throw new CustomException("User with ID " + userId + " not found");
+        }
     }
 }
-

@@ -3,8 +3,14 @@ package com.youcode.marjan.Services;
 
 import com.youcode.marjan.Models.Admin;
 import com.youcode.marjan.Repositories.AdminRepository;
+import com.youcode.marjan.Services.Exceptions.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AdminService {
@@ -16,18 +22,32 @@ public class AdminService {
         this.adminRepository = adminRepository;
     }
 
-    public boolean registerAdmin(Admin admin) {
-        // Check if the admin with the given username already exists
-        if (adminRepository.findByUsername(String.valueOf(admin.getUsername() != null))) {
-            // Admin with this username already exists
-            return false;
-        }
 
-        // Perform necessary validations on the admin object
-        // ... (validate other fields as needed)
-
-        // Save the admin to the database
+    public void saveAdmin(Admin admin) {
         adminRepository.save(admin);
-        return true; // Admin registered successfully
+        System.out.println(admin);
+    }
+
+    public void deleteAdminById(Long id) {
+        Optional<Admin> admin = adminRepository.findById(id);
+        if (admin.isPresent()) {
+            adminRepository.deleteById(id);
+            ResponseEntity.status(HttpStatus.OK).body("Admin deleted successfully");
+        } else {
+            throw new CustomException("Admin with ID " + id + " not found");
+        }
+    }
+
+    public Admin getAdminById(Long id) {
+        Optional<Admin> admin = adminRepository.findById(id);
+        if (admin.isPresent()) {
+            return admin.get();
+        } else {
+            throw new CustomException("Admin with ID " + id + " not found");
+        }
+    }
+
+    public List<Admin> getAllAdmins() {
+        return adminRepository.findAll();
     }
 }

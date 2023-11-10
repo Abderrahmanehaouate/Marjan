@@ -3,8 +3,8 @@ package com.youcode.marjan.Models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "tbl_users")
-public class User extends BaseUser {
+@Table(name = "tbl_general_admin")
+public class GeneralAdmin extends BaseUser{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
